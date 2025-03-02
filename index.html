@@ -36,8 +36,10 @@
         header {
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
         }
         
@@ -45,7 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
         }
         
         .logo {
@@ -89,15 +91,22 @@
             cursor: pointer;
         }
         
+        /* Add padding to body to account for fixed header */
+        body {
+            padding-top: 80px;
+        }
+        
+        /* Adjust hero section to account for the header */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1200/600') center/cover;
-            height: 80vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
+            padding: 60px 20px;
         }
         
         .hero h1 {
@@ -419,6 +428,53 @@
             font-size: 14px;
         }
         
+        /* Home locations styling */
+        .home-locations {
+            background-color: white;
+        }
+        
+        .location-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .location-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .location-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-family: var(--font-main);
+        }
+        
+        .location-details p {
+            margin-bottom: 10px;
+        }
+        
+        .map-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .map-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -459,6 +515,12 @@
         .visible {
             display: block;
         }
+
+        /* Adjust all section scroll offsets to account for fixed header */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
     </style>
 </head>
 <body>
@@ -470,6 +532,7 @@
                     <li><a href="#home" class="nav-link" data-lang="en">Home</a><a href="#home" class="nav-link hidden" data-lang="uz">Бош саҳифа</a></li>
                     <li><a href="#our-story" class="nav-link" data-lang="en">Our Story</a><a href="#our-story" class="nav-link hidden" data-lang="uz">Бизнинг тарихимиз</a></li>
                     <li><a href="#details" class="nav-link" data-lang="en">Event Details</a><a href="#details" class="nav-link hidden" data-lang="uz">Тадбир тафсилотлари</a></li>
+                    <li><a href="#home-locations" class="nav-link" data-lang="en">Our Homes</a><a href="#home-locations" class="nav-link hidden" data-lang="uz">Бизнинг уйларимиз</a></li>
                     <li><a href="#accommodation" class="nav-link" data-lang="en">Accommodation</a><a href="#accommodation" class="nav-link hidden" data-lang="uz">Жойлашув</a></li>
                     <li><a href="#rsvp" class="nav-link" data-lang="en">RSVP</a><a href="#rsvp" class="nav-link hidden" data-lang="uz">Тасдиқлаш</a></li>
                     <li><a href="#gallery" class="nav-link" data-lang="en">Gallery</a><a href="#gallery" class="nav-link hidden" data-lang="uz">Галерея</a></li>
@@ -580,112 +643,62 @@
         </div>
     </section>
 
-    <section class="details" id="details">
+    <!-- New section for Home Locations -->
+    <section class="home-locations" id="home-locations">
         <div class="container">
-            <h2 class="section-title" data-lang="en">Event Details</h2>
-            <h2 class="section-title hidden" data-lang="uz">Тадбир тафсилотлари</h2>
+            <h2 class="section-title" data-lang="en">Our Homes</h2>
+            <h2 class="section-title hidden" data-lang="uz">Бизнинг уйларимиз</h2>
             
-            <div class="details-card">
-                <h3 data-lang="en">Wedding Ceremony</h3>
-                <h3 class="hidden" data-lang="uz">Никоҳ маросими</h3>
-                <div class="event-details">
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Date & Time</p>
-                        <p class="detail-title hidden" data-lang="uz">Сана ва вақт</p>
-                        <p data-lang="en">June 15, 2025 at 2:00 PM</p>
-                        <p class="hidden" data-lang="uz">2025 йил 15 июнь, соат 14:00 да</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Location</p>
-                        <p class="detail-title hidden" data-lang="uz">Жойлашув</p>
-                        <p data-lang="en">Hyatt Regency Tashkent</p>
-                        <p class="hidden" data-lang="uz">Hyatt Regency Тошкент</p>
-                        <p data-lang="en">1A Navoi Street, Tashkent, Uzbekistan</p>
-                        <p class="hidden" data-lang="uz">Навоий кўчаси 1А, Тошкент, Ўзбекистон</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Dress Code</p>
-                        <p class="detail-title hidden" data-lang="uz">Кийим коди</p>
-                        <p data-lang="en">Formal/Semi-formal</p>
-                        <p class="hidden" data-lang="uz">Расмий/Яримрасмий</p>
+            <div class="location-cards">
+                <div class="location-card">
+                    <h3 data-lang="en">Aziz's Family Home</h3>
+                    <h3 class="hidden" data-lang="uz">Азизнинг оила уйи</h3>
+                    <div class="location-details">
+                        <p data-lang="en"><strong>Address:</strong> 45 Mustaqillik Avenue, Tashkent, Uzbekistan</p>
+                        <p class="hidden" data-lang="uz"><strong>Манзил:</strong> Мустақиллик шоҳ кўчаси 45, Тошкент, Ўзбекистон</p>
+                        <p data-lang="en"><strong>Neighborhood:</strong> Yunusabad District</p>
+                        <p class="hidden" data-lang="uz"><strong>Туман:</strong> Юнусобод тумани</p>
+                        <p data-lang="en">This is where Aziz grew up with his parents and two brothers. The family has lived here for over 25 years.</p>
+                        <p class="hidden" data-lang="uz">Бу ерда Азиз ота-онаси ва икки акаси билан вояга етган. Оила бу ерда 25 йилдан ортиқ вақт яшаган.</p>
+                        <a href="https://maps.google.com/?q=45+Mustaqillik+Avenue,+Tashkent,+Uzbekistan" target="_blank" class="map-btn" data-lang="en">View on Google Maps</a>
+                        <a href="https://maps.google.com/?q=45+Mustaqillik+Avenue,+Tashkent,+Uzbekistan" target="_blank" class="map-btn hidden" data-lang="uz">Google Xaritalarda кўриш</a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="details-card">
-                <h3 data-lang="en">Reception</h3>
-                <h3 class="hidden" data-lang="uz">Қабул маросими</h3>
-                <div class="event-details">
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Date & Time</p>
-                        <p class="detail-title hidden" data-lang="uz">Сана ва вақт</p>
-                        <p data-lang="en">June 15, 2025 at 5:00 PM</p>
-                        <p class="hidden" data-lang="uz">2025 йил 15 июнь, соат 17:00 да</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Location</p>
-                        <p class="detail-title hidden" data-lang="uz">Жойлашув</p>
-                        <p data-lang="en">Hyatt Regency Tashkent - Grand Ballroom</p>
-                        <p class="hidden" data-lang="uz">Hyatt Regency Тошкент - Катта базм зали</p>
-                        <p data-lang="en">1A Navoi Street, Tashkent, Uzbekistan</p>
-                        <p class="hidden" data-lang="uz">Навоий кўчаси 1А, Тошкент, Ўзбекистон</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">What to Expect</p>
-                        <p class="detail-title hidden" data-lang="uz">Нимани кутиш керак</p>
-                        <p data-lang="en">Dinner, dancing, and celebration until midnight</p>
-                        <p class="hidden" data-lang="uz">Кечки овқат, рақс ва ярим тунгача нишонлаш</p>
+                
+                <div class="location-card">
+                    <h3 data-lang="en">Madina's Family Home</h3>
+                    <h3 class="hidden" data-lang="uz">Мадинанинг оила уйи</h3>
+                    <div class="location-details">
+                        <p data-lang="en"><strong>Address:</strong> 12 Amir Temur Street, Tashkent, Uzbekistan</p>
+                        <p class="hidden" data-lang="uz"><strong>Манзил:</strong> Амир Темур кўчаси 12, Тошкент, Ўзбекистон</p>
+                        <p data-lang="en"><strong>Neighborhood:</strong> Mirabad District</p>
+                        <p class="hidden" data-lang="uz"><strong>Туман:</strong> Мирзо Улуғбек тумани</p>
+                        <p data-lang="en">Madina grew up in this beautiful home with her parents and younger sister. The family garden is known for its beautiful roses.</p>
+                        <p class="hidden" data-lang="uz">Мадина бу чиройли уйда ота-онаси ва кичик синглиси билан вояга етган. Оила боғи чиройли гуллари билан машҳур.</p>
+                        <a href="https://maps.google.com/?q=12+Amir+Temur+Street,+Tashkent,+Uzbekistan" target="_blank" class="map-btn" data-lang="en">View on Google Maps</a>
+                        <a href="https://maps.google.com/?q=12+Amir+Temur+Street,+Tashkent,+Uzbekistan" target="_blank" class="map-btn hidden" data-lang="uz">Google Xaritalarda кўриш</a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="details-card">
-                <h3 data-lang="en">Pre-Wedding Dinner</h3>
-                <h3 class="hidden" data-lang="uz">Тўйдан олдинги кечки овқат</h3>
-                <div class="event-details">
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Date & Time</p>
-                        <p class="detail-title hidden" data-lang="uz">Сана ва вақт</p>
-                        <p data-lang="en">June 14, 2025 at 7:00 PM</p>
-                        <p class="hidden" data-lang="uz">2025 йил 14 июнь, соат 19:00 да</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Location</p>
-                        <p class="detail-title hidden" data-lang="uz">Жойлашув</p>
-                        <p data-lang="en">Sato Restaurant</p>
-                        <p class="hidden" data-lang="uz">Сато ресторани</p>
-                        <p data-lang="en">10 Amir Temur Avenue, Tashkent</p>
-                        <p class="hidden" data-lang="uz">Амир Темур шоҳ кўчаси 10, Тошкент</p>
-                    </div>
-                    <div class="event-detail">
-                        <p class="detail-title" data-lang="en">Note</p>
-                        <p class="detail-title hidden" data-lang="uz">Изоҳ</p>
-                        <p data-lang="en">For close family and out-of-town guests only</p>
-                        <p class="hidden" data-lang="uz">Фақат яқин оила аъзолари ва шаҳардан ташқаридан келган меҳмонлар учун</p>
+                
+                <div class="location-card">
+                    <h3 data-lang="en">Our New Home</h3>
+                    <h3 class="hidden" data-lang="uz">Бизнинг янги уйимиз</h3>
+                    <div class="location-details">
+                        <p data-lang="en"><strong>Address:</strong> 78 Bunyodkor Avenue, Tashkent, Uzbekistan</p>
+                        <p class="hidden" data-lang="uz"><strong>Манзил:</strong> Бунёдкор шоҳ кўчаси 78, Тошкент, Ўзбекистон</p>
+                        <p data-lang="en"><strong>Neighborhood:</strong> Chilanzar District</p>
+                        <p class="hidden" data-lang="uz"><strong>Туман:</strong> Чилонзор тумани</p>
+                        <p data-lang="en">This is where we'll begin our married life together. We're excited to welcome friends and family to our new home after the wedding.</p>
+                        <p class="hidden" data-lang="uz">Бу ерда биз никоҳдан кейин ҳаётимизни бошлаймиз. Биз тўйдан кейин дўстларимиз ва оиламизни янги уйимизга кутиб олишга интиқмиз.</p>
+                        <a href="https://maps.google.com/?q=78+Bunyodkor+Avenue,+Tashkent,+Uzbekistan" target="_blank" class="map-btn" data-lang="en">View on Google Maps</a>
+                        <a href="https://maps.google.com/?q=78+Bunyodkor+Avenue,+Tashkent,+Uzbekistan" target="_blank" class="map-btn hidden" data-lang="uz">Google Xaritalarda кўриш</a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="map-container" id="map">
-                <!-- Map placeholder - would be replaced with actual map in implementation -->
             </div>
         </div>
     </section>
 
-    <section class="accommodation" id="accommodation">
+    <section class="details" id="details">
         <div class="container">
-            <h2 class="section-title" data-lang="en">Accommodation</h2>
-            <h2 class="section-title hidden" data-lang="uz">Жойлашув</h2>
-            
-            <div class="accommodations">
-                <div class="accommodation-item">
-                    <h3 data-lang="en">Hyatt Regency Tashkent</h3>
-                    <h3 class="hidden" data-lang="uz">Hyatt Regency Тошкент</h3>
-                    <p data-lang="en"><strong>Address:</strong> 1A Navoi Street, Tashkent</p>
-                    <p class="hidden" data-lang="uz"><strong>Манзил:</strong> Навоий кўчаси 1А, Тошкент</p>
-                    <p data-lang="en"><strong>Phone:</strong> +998 71 200 1234</p>
-                    <p class="hidden" data-lang="uz"><strong>Телефон:</strong> +998 71 200 1234</p>
-                    <p data-lang="en"><strong>Special Rate:</strong> Use code "AZIZMADINA" for 15% discount</p>
-                    <p class="hidden" data-lang="uz"><strong>Махсус нарх:</strong> 15% чегирма учун "AZIZMADINA" кодидан фойдаланинг</p>
-                    <p data-lang="en">This is our wedding venue and most convenient option for guests</p>
-                    <p class="hidden" data-lang="uz">Бу бизнинг тўй жойимиз ва меҳмонлар учун энг қулай вариант</p
+            <h2 class="section-title" data-lang="en">Event Details</h2>
+            <h2 class="section-title hidden" data-lang="uz">Тад
